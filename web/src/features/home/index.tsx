@@ -19,8 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { PublicLayout } from '@/components/layout'
-import { Footer } from '@/components/layout/components/footer'
+import { PublicLayout, EnterpriseFooter } from '@/components/layout'
 import { RichContent } from '@/components/rich-content'
 import { useTheme } from '@/context/theme-provider'
 import { isLikelyHtml } from '@/lib/content-format'
@@ -127,7 +126,7 @@ export function Home() {
       <Features />
       <HowItWorks />
       <CTA isAuthenticated={isAuthenticated} />
-      <Footer />
+      <EnterpriseFooter />
     </PublicLayout>
   )
 }

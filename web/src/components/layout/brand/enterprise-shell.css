@@ -1,0 +1,22 @@
+/*
+Copyright (C) 2023-2026 QuantumNous
+
+Doohuan enterprise shell — layout tokens for Phase B native header/footer.
+*/
+
+:root {
+  --dh-shell-bg: #f7f7f4;
+  --dh-shell-ink: #1a1f26;
+  --dh-shell-muted: #5c6673;
+  --dh-shell-faint: #8a93a0;
+  --dh-shell-idle: #6b7280;
+  --dh-shell-border: #d5dae2;
+  --dh-shell-surface: #eef1f4;
+  --dh-shell-header-height: 4rem;
+  --dh-shell-header-height-float: 3.75rem;
+}
+
+/* Console layout uses sticky header; keep content calc in sync */
+.dh-enterprise-console-header {
+  --app-header-height: var(--dh-shell-header-height);
+}

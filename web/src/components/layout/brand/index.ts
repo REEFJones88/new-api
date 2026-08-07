@@ -16,17 +16,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-/**
- * Application-wide constants
- */
-
-// System Configuration Defaults
-export const DEFAULT_SYSTEM_NAME = 'Doohuan API'
-export const DEFAULT_LOGO = '/doohuan-icon.svg'
-
-// LocalStorage Keys
-export const STORAGE_KEYS = {
-  SYSTEM_NAME: 'system_name',
-  LOGO: 'logo',
-  FOOTER_HTML: 'footer_html',
-} as const
+export { EnterpriseHeader } from './enterprise-header'
+export { EnterpriseFooter } from './enterprise-footer'
+export {
+  ENTERPRISE_ORIGINS,
+  ENTERPRISE_SHELL_BG,
+  getAboutHref,
+  getAipsProductLinks,
+  getApiProductLinks,
+  getEnterpriseFooterColumns,
+} from './enterprise-nav-config'

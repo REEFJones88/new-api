@@ -24,7 +24,7 @@ import { SearchProvider } from '@/context/search-provider'
 import { getCookie } from '@/lib/cookies'
 import { cn } from '@/lib/utils'
 
-import { AppHeader } from './app-header'
+import { EnterpriseHeader } from '../brand/enterprise-header'
 import { AppSidebar } from './app-sidebar'
 
 type AuthenticatedLayoutProps = {
@@ -39,7 +39,7 @@ export function AuthenticatedLayout(props: AuthenticatedLayoutProps) {
       <SearchProvider>
         <SidebarProvider defaultOpen={defaultOpen} className='flex-col'>
           <SkipToMain />
-          <AppHeader />
+          <EnterpriseHeader variant='console' />
           <div className='flex min-h-0 w-full flex-1'>
             <AppSidebar />
             <SidebarInset
