@@ -1,0 +1,24 @@
+# Fast rebuild: reuse frontend dist extracted from current production image, only recompile Go.
+# On server:
+#   1) docker create --name na-dist calciumion/new-api:latest && docker cp na-dist:/new-api /tmp/na.bin && docker rm na-dist
+#   2) Or use this file with build-arg after extracting embed via helper.
+#
+# Preferred one-shot used by deploy script: Dockerfile.doohuan-patch.full
+
+ARG BASE_IMAGE=calciumion/new-api:latest
+
+# Extract embedded web assets by running a tiny helper against the stock binary is hard;
+# instead copy pre-built dist from the builder context (uploaded by deploy).
+
+FROM golang:1.26.1-alpine AS builder
+ENV GO111MODULE=on CGO_ENABLED=0 GOOS=linux
+WORKDIR /build
+RUN apk add --no-cache git ca-certificates
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN test -f web/default/dist/index.html && test -f web/classic/dist/index.html
+RUN go build -ldflags "-s -w -X 'github.com/QuantumNous/new-api/common.Version=$(cat VERSION)-doohuan'" -o new-api
+
+FROM ${BASE_IMAGE}
+COPY --from=builder /build/new-api /new-api

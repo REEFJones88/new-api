@@ -16,17 +16,27 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+import type { TFunction } from 'i18next'
+
+export const DOOHUAN_SYSTEM_NAME = 'Doohuan API'
+
+const DOOHUAN_SYSTEM_NAME_ALIASES = new Set([
+  DOOHUAN_SYSTEM_NAME,
+  '多焕 API',
+])
+
 /**
- * Application-wide constants
+ * Localize the configured Doohuan brand while preserving custom system names.
+ * The API and persisted option keep the stable canonical value `Doohuan API`;
+ * only the presentation layer translates it.
  */
-
-// System Configuration Defaults
-export const DEFAULT_SYSTEM_NAME = 'New API'
-export const DEFAULT_LOGO = '/doohuan-icon.svg'
-
-// LocalStorage Keys
-export const STORAGE_KEYS = {
-  SYSTEM_NAME: 'system_name',
-  LOGO: 'logo',
-  FOOTER_HTML: 'footer_html',
-} as const
+export function localizeSystemName(
+  systemName: string | undefined,
+  t: TFunction
+): string {
+  const normalizedName = systemName?.trim() || DOOHUAN_SYSTEM_NAME
+  if (DOOHUAN_SYSTEM_NAME_ALIASES.has(normalizedName)) {
+    return t(DOOHUAN_SYSTEM_NAME)
+  }
+  return normalizedName
+}

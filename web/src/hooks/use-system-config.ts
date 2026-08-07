@@ -17,9 +17,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { useEffect, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { DEFAULT_SYSTEM_NAME, DEFAULT_LOGO } from '@/lib/constants'
 import { applyFaviconToDom } from '@/lib/dom-utils'
+import { localizeSystemName } from '@/lib/system-branding'
 import {
   useSystemConfigStore,
   type CurrencyConfig,
@@ -143,6 +145,7 @@ function preloadImage(
  */
 export function useSystemConfig(options: UseSystemConfigOptions = {}) {
   const { autoLoad = false } = options
+  const { t } = useTranslation()
   const {
     config,
     loading,
@@ -198,6 +201,7 @@ export function useSystemConfig(options: UseSystemConfigOptions = {}) {
 
   return {
     ...config,
+    systemName: localizeSystemName(config.systemName, t),
     loading,
     logoLoaded: config.logo === loadedLogoUrl && !!loadedLogoUrl,
   }

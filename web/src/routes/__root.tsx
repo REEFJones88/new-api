@@ -49,7 +49,15 @@ function RootComponent() {
   const queryClient = useQueryClient()
 
   // Load system configuration (logo, system name, etc.) from backend
-  useSystemConfig({ autoLoad: true })
+  const { systemName } = useSystemConfig({ autoLoad: true })
+
+  useEffect(() => {
+    document.title = systemName
+    const metaTitle = document.querySelector<HTMLMetaElement>(
+      'meta[name="title"]'
+    )
+    metaTitle?.setAttribute('content', systemName)
+  }, [systemName])
 
   useEffect(() => {
     const aff = new URLSearchParams(window.location.search).get('aff')?.trim()

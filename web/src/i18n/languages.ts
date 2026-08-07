@@ -32,21 +32,15 @@ export type InterfaceLanguageCode =
 export function normalizeInterfaceLanguage(value?: string | null): string {
   if (!value) return 'en'
 
-  let normalized = value.trim().replaceAll('_', '-').toLowerCase()
-  if (
-    value === 'zh-TW' ||
-    value === 'zh-HK' ||
-    value === 'zh-MO' ||
-    value === 'zhTW'
-  ) {
-    normalized = 'zhTW'
-  }
-  if (value === 'zh-CN' || value === 'zh-Hans' || value === 'zhCN') {
-    normalized = 'zhCN'
+  // Legacy values from older new-api / chrome inject used `zh` / `zh-CN`.
+  // Without mapping them to `zhCN`, i18next falls back to English.
+  const lower = value.trim().replaceAll('_', '-').toLowerCase()
+  if (lower.startsWith('zh')) {
+    return convertDetectedLanguage(value)
   }
 
-  return INTERFACE_LANGUAGE_OPTIONS.some((lang) => lang.code === normalized)
-    ? normalized
+  return INTERFACE_LANGUAGE_OPTIONS.some((lang) => lang.code === lower)
+    ? lower
     : 'en'
 }
 
