@@ -19,6 +19,8 @@ For commercial licensing, please contact support@quantumnous.com
 
 const DOOHUAN_API_HOST = 'api.doohuan.com'
 const DOOHUAN_REGISTER_URL = 'https://www.doohuan.com/register'
+const DOOHUAN_SIGN_OUT_URL =
+  'https://www.doohuan.com/auth/signout?api=1&next=/login'
 
 function sanitizeReturnPath(returnTo?: string): string {
   if (!returnTo) return '/console'
@@ -52,4 +54,12 @@ export function getDoohuanSSORedirect(
  */
 export function getDoohuanRegisterRedirect(hostname: string): string | null {
   return hostname === DOOHUAN_API_HOST ? DOOHUAN_REGISTER_URL : null
+}
+
+/**
+ * 多焕托管域名退出时必须先清除 www 的 Supabase 会话，再回到 API 清理
+ * new-api 会话；否则下次访问控制台会被仍有效的 www 会话自动登录。
+ */
+export function getDoohuanSignOutRedirect(hostname: string): string | null {
+  return hostname === DOOHUAN_API_HOST ? DOOHUAN_SIGN_OUT_URL : null
 }

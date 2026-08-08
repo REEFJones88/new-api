@@ -21,6 +21,7 @@ import { describe, test } from 'node:test'
 
 import {
   getDoohuanRegisterRedirect,
+  getDoohuanSignOutRedirect,
   getDoohuanSSORedirect,
 } from '../doohuan-auth-redirect'
 
@@ -56,5 +57,13 @@ describe('Doohuan hosted authentication redirects', () => {
       getDoohuanRegisterRedirect('api.doohuan.com'),
       'https://www.doohuan.com/register'
     )
+  })
+
+  test('routes hosted sign-out through www before clearing the API session', () => {
+    assert.equal(
+      getDoohuanSignOutRedirect('api.doohuan.com'),
+      'https://www.doohuan.com/auth/signout?api=1&next=/login'
+    )
+    assert.equal(getDoohuanSignOutRedirect('localhost'), null)
   })
 })

@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -71,6 +72,34 @@ func TestRedisIPRateLimiterThresholdTTLAndNamespace(t *testing.T) {
 	assert.Equal(t, "3", count)
 	assert.Equal(t, 37*time.Second, redisServer.TTL(key))
 	assert.True(t, redisServer.Exists(legacyKey), "the v2 counter must not touch an old list key")
+}
+
+func TestOAuthStateRateLimitDoesNotConsumeCriticalBudget(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	redisServer, _ := useRateLimitMiniRedis(t)
+
+	previousCriticalRateLimitEnable := common.CriticalRateLimitEnable
+	common.CriticalRateLimitEnable = true
+	t.Cleanup(func() {
+		common.CriticalRateLimitEnable = previousCriticalRateLimitEnable
+	})
+
+	router := gin.New()
+	require.NoError(t, router.SetTrustedProxies(nil))
+	router.GET("/oauth-state", OAuthStateRateLimit(), func(c *gin.Context) {
+		c.Status(http.StatusNoContent)
+	})
+
+	clientIP := "192.0.2.15"
+	criticalKey := redisIPRateLimitKey("CT", clientIP)
+	require.NoError(
+		t,
+		redisServer.Set(criticalKey, strconv.Itoa(common.CriticalRateLimitNum)),
+	)
+
+	response := performRateLimitRequest(router, "/oauth-state", clientIP+":12345")
+	assert.Equal(t, http.StatusNoContent, response.Code)
+	assert.True(t, redisServer.Exists(redisIPRateLimitKey("OS", clientIP)))
 }
 
 func TestRedisUserRateLimiterUsesSharedFixedWindow(t *testing.T) {

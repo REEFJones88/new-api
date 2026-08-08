@@ -24,6 +24,7 @@ import { toast } from 'sonner'
 
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { logout } from '@/features/auth/api'
+import { getDoohuanSignOutRedirect } from '@/features/auth/lib/doohuan-auth-redirect'
 import { clearAuthenticatedClientState } from '@/lib/auth-session'
 
 interface SignOutDialogProps {
@@ -48,6 +49,15 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
 
       clearAuthenticatedClientState(queryClient)
       toast.success(t('Signed out'))
+
+      const hostedSignOutUrl = getDoohuanSignOutRedirect(
+        window.location.hostname
+      )
+      if (hostedSignOutUrl) {
+        window.location.replace(hostedSignOutUrl)
+        return
+      }
+
       void navigate({ to: '/sign-in', replace: true })
     } catch (error: unknown) {
       toast.error(

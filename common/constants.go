@@ -208,6 +208,12 @@ var (
 	CriticalRateLimitNum            = 20
 	CriticalRateLimitDuration int64 = 20 * 60
 
+	// OAuth state is initialized automatically by hosted SSO entry pages. Keep
+	// it isolated from password reset, login, logout, and other critical APIs so
+	// repeated SSO navigation cannot exhaust the shared authentication budget.
+	OAuthStateRateLimitNum            = 60
+	OAuthStateRateLimitDuration int64 = 20 * 60
+
 	UploadRateLimitNum            = 10
 	UploadRateLimitDuration int64 = 60
 
