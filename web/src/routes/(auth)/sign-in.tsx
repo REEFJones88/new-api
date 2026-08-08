@@ -20,6 +20,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { z } from 'zod'
 
 import { sanitizeAuthRedirect } from '@/features/auth/lib/auth-redirect'
+import { getDoohuanSSORedirect } from '@/features/auth/lib/doohuan-auth-redirect'
 import { SignIn } from '@/features/auth/sign-in'
 import { useAuthStore } from '@/stores/auth-store'
 
@@ -32,6 +33,20 @@ export const Route = createFileRoute('/(auth)/sign-in')({
   validateSearch: searchSchema,
   beforeLoad: async ({ search }) => {
     const { auth } = useAuthStore.getState()
+
+    if (!auth.user) {
+      const ssoRedirect = getDoohuanSSORedirect(
+        window.location.hostname,
+        search?.redirect
+      )
+      if (ssoRedirect) {
+        throw redirect({
+          href: ssoRedirect,
+          replace: true,
+          reloadDocument: true,
+        })
+      }
+    }
 
     // 如果已经有用户信息，说明已登录
     if (auth.user) {

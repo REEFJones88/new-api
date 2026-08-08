@@ -18,6 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
+import { getDoohuanRegisterRedirect } from '@/features/auth/lib/doohuan-auth-redirect'
 import { SignUp } from '@/features/auth/sign-up'
 import { useAuthStore } from '@/stores/auth-store'
 
@@ -25,6 +26,19 @@ export const Route = createFileRoute('/(auth)/sign-up')({
   component: SignUp,
   beforeLoad: async () => {
     const { auth } = useAuthStore.getState()
+
+    if (!auth.user) {
+      const registerRedirect = getDoohuanRegisterRedirect(
+        window.location.hostname
+      )
+      if (registerRedirect) {
+        throw redirect({
+          href: registerRedirect,
+          replace: true,
+          reloadDocument: true,
+        })
+      }
+    }
 
     // 如果已经有用户信息，说明已登录，注册页对其无意义，跳转到 dashboard
     if (auth.user) {
