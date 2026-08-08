@@ -47,17 +47,19 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
         return
       }
 
-      clearAuthenticatedClientState(queryClient)
-      toast.success(t('Signed out'))
-
       const hostedSignOutUrl = getDoohuanSignOutRedirect(
         window.location.hostname
       )
       if (hostedSignOutUrl) {
+        // Leave the SPA before resetting its reactive auth store. Resetting
+        // first lets the route guard start a fresh SSO flow and can win this
+        // navigation race before the www Supabase session is cleared.
         window.location.replace(hostedSignOutUrl)
         return
       }
 
+      clearAuthenticatedClientState(queryClient)
+      toast.success(t('Signed out'))
       void navigate({ to: '/sign-in', replace: true })
     } catch (error: unknown) {
       toast.error(
