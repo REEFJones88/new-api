@@ -32,31 +32,6 @@ export type EnterpriseNavItem = {
   href: string
 }
 
-export function getAboutHref(wwwOrigin = ENTERPRISE_ORIGINS.www): string {
-  return `${wwwOrigin}/about`
-}
-
-export function getAipsProductLinks(
-  aipsOrigin = ENTERPRISE_ORIGINS.aips
-): EnterpriseNavItem[] {
-  return [
-    { labelKey: 'Home', href: aipsOrigin },
-    { labelKey: 'Features', href: `${aipsOrigin}/features` },
-    { labelKey: 'Pricing', href: `${aipsOrigin}/pricing` },
-    { labelKey: 'Download', href: `${aipsOrigin}/download` },
-  ]
-}
-
-export function getApiProductLinks(
-  apiOrigin = ENTERPRISE_ORIGINS.api
-): EnterpriseNavItem[] {
-  return [
-    { labelKey: 'Overview', href: `${apiOrigin}/` },
-    { labelKey: 'Model Marketplace', href: `${apiOrigin}/pricing` },
-    { labelKey: 'Docs', href: `${apiOrigin}/doc` },
-  ]
-}
-
 export type EnterpriseFooterColumn = {
   titleKey: string
   links: EnterpriseNavItem[]

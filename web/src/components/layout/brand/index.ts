@@ -21,8 +21,5 @@ export { EnterpriseFooter } from './enterprise-footer'
 export {
   ENTERPRISE_ORIGINS,
   ENTERPRISE_SHELL_BG,
-  getAboutHref,
-  getAipsProductLinks,
-  getApiProductLinks,
   getEnterpriseFooterColumns,
 } from './enterprise-nav-config'
