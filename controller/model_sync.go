@@ -29,8 +29,15 @@ const (
 func normalizeLocale(locale string) (string, bool) {
 	l := strings.ToLower(strings.TrimSpace(locale))
 	switch l {
-	case "en", "zh-CN", "zh-TW", "ja":
-		return l, true
+	case "en":
+		return "en", true
+	// 前端同步向导传 `zh`；上游目录实际路径是 /api/i18n/zh/…（不是 zh-CN）。
+	case "zh", "zh-cn":
+		return "zh", true
+	case "zh-tw":
+		return "zh-TW", true
+	case "ja":
+		return "ja", true
 	default:
 		return "", false
 	}
