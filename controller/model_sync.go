@@ -31,12 +31,14 @@ func normalizeLocale(locale string) (string, bool) {
 	switch l {
 	case "en":
 		return "en", true
-	// 前端同步向导传 `zh`；上游目录实际路径是 /api/i18n/zh/…（不是 zh-CN）。
-	case "zh", "zh-cn":
+	case "zh", "zh-cn", "zh_cn", "zh-hans":
+		// 上游目录实际路径是 /api/i18n/zh/…；前端向导传的是 "zh"。
+		// 旧实现 ToLower 后仍匹配 "zh-CN"，永远对不上，会静默回落到英文默认源。
 		return "zh", true
-	case "zh-tw":
-		return "zh-TW", true
-	case "ja":
+	case "zh-tw", "zh_tw", "zh-hant":
+		// 上游暂无独立 zh-TW 包时，回退简体中文源，避免再掉进英文。
+		return "zh", true
+	case "ja", "jp":
 		return "ja", true
 	default:
 		return "", false
