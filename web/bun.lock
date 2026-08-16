@@ -10,7 +10,7 @@
         "@codemirror/language": "^6.12.4",
         "@codemirror/state": "^6.7.0",
         "@codemirror/view": "^6.43.4",
-        "@doohuan/enterprise-navigation": "https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.3.tar.gz",
+        "@doohuan/enterprise-navigation": "https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.5.tar.gz",
         "@fontsource-variable/lora": "^5.2.8",
         "@fontsource-variable/public-sans": "^5.2.7",
         "@hookform/resolvers": "^5.4.0",
@@ -220,7 +220,7 @@
 
     "@dnd-kit/utilities": ["@dnd-kit/utilities@3.2.2", "", { "dependencies": { "tslib": "^2.0.0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg=="],
 
-    "@doohuan/enterprise-navigation": ["@doohuan/enterprise-navigation@https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.3.tar.gz", { "peerDependencies": { "react": ">=19", "react-dom": ">=19" } }, "sha512-ouhy2Hqqy6rNjKXDyqPv6tV3rVHiySt7Xo9+tgno3JHNUJUzlOCmGn+tGp9aq9r5cueR2r/LducG470wfOCRUw=="],
+    "@doohuan/enterprise-navigation": ["@doohuan/enterprise-navigation@https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.5.tar.gz", { "peerDependencies": { "react": ">=19", "react-dom": ">=19" } }, "sha512-2k+GV5WCHsRynUQRkVNSIaYIb+oBw9toLdD4zF2JNS5Z+ojrGsUo25QxL/xNplCvTX/GZtnyoH2qY6mxoeRP2A=="],
 
     "@dotenvx/dotenvx": ["@dotenvx/dotenvx@1.75.1", "", { "dependencies": { "@dotenvx/primitives": "^0.8.0", "commander": "^11.1.0", "conf": "^10.2.0", "dotenv": "^17.2.1", "enquirer": "^2.4.1", "env-paths": "^2.2.1", "execa": "^5.1.1", "fdir": "^6.2.0", "ignore": "^5.3.0", "object-treeify": "1.1.33", "open": "^8.4.2", "picomatch": "^4.0.4", "systeminformation": "^5.22.11", "undici": "^7.11.0", "which": "^4.0.0", "yocto-spinner": "^1.1.0" }, "bin": { "dotenvx": "src/cli/dotenvx.js" } }, "sha512-/BITOC9dmS/edY2zQwZNicQ059O6RKabtQfyEafV0nGtfYRNHYy1DIPiYVcov40+tob9hfmBnbR963dS+EQ1DQ=="],
 
