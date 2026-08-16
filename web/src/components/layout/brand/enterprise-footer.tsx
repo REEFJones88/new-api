@@ -67,7 +67,7 @@ export function EnterpriseFooter(props: EnterpriseFooterProps) {
       style={{ backgroundColor: ENTERPRISE_SHELL_BG }}
     >
       {showCta ? (
-        <div className='mx-auto max-w-[1400px] px-6 py-20'>
+        <div className='mx-auto w-full px-[clamp(20px,2.5vw,40px)] py-20'>
           <div className='text-center'>
             <h2 className='mb-6 text-[32px] font-medium tracking-[-0.02em] text-[#1a1f26] md:text-[40px]'>
               {t('Start building with Doohuan API')}
@@ -91,7 +91,7 @@ export function EnterpriseFooter(props: EnterpriseFooterProps) {
       ) : null}
 
       <div
-        className={`mx-auto max-w-[1400px] px-6 pb-8${showCta ? '' : ' pt-14'}`}
+        className={`mx-auto w-full px-[clamp(20px,2.5vw,40px)] pb-8${showCta ? '' : ' pt-14'}`}
       >
         <div className='grid grid-cols-2 gap-8 border-t border-[#d5dae2] py-10 md:grid-cols-4 lg:grid-cols-6'>
           <div className='col-span-2'>
