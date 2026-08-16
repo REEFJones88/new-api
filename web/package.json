@@ -24,7 +24,7 @@
     "@codemirror/language": "^6.12.4",
     "@codemirror/state": "^6.7.0",
     "@codemirror/view": "^6.43.4",
-    "@doohuan/enterprise-navigation": "https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.5.tar.gz",
+    "@doohuan/enterprise-navigation": "https://github.com/doohuan-ai/enterprise-navigation/archive/refs/tags/v0.1.6.tar.gz",
     "@fontsource-variable/lora": "^5.2.8",
     "@fontsource-variable/public-sans": "^5.2.7",
     "@hookform/resolvers": "^5.4.0",
